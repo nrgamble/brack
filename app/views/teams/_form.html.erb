@@ -1,0 +1,18 @@
+<div data-role="fieldcontain">
+  <%= f.label :tournament_id %>
+  <%= f.hidden_field(:tournament_id, :value => @tournament.id) %>
+  <div class="value"><%= @tournament.name %></div>
+</div>
+  
+<div data-role="fieldcontain">
+  <%= f.label :pool_id %>
+  <%= f.collection_select(:pool_id, @tournament.pools, :id, :name, { :include_blank => true, :selected => @pool_id }) %>
+</div>
+  
+<div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
+
+<div data-role="fieldcontain"><%= f.label :email %> <%= f.text_field :email %></div>
+  
+<% unless @team.new_record? %>
+  <%= link_to 'Delete', @team, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'b' %>
+<% end %>

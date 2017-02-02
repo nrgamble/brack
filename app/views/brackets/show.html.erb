@@ -1,0 +1,22 @@
+<div data-role="navbar">
+  <ul>
+    <% @rounds.each_with_index do |r, i| %>
+      <li><a id="a_round_<%= i + 1 %>" <%= 'class="ui-btn-active ui-btn-up-c"'.html_safe if i.zero? %>>Round <%= i + 1 %></a></li>
+    <% end %>
+  </ul>
+</div>
+
+<div id="bracket" class="bleft">
+  <% @rounds.each_with_index do |r, i| %>
+    <div class="pane <%= 'none' if i > 0 %>">
+      <div class="round" id="round_<%= i + 1 %>">
+        <%= r.html_safe %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Regenerate Bracket', edit_bracket_url(@bracket), 'data-role' => 'button', 'data-theme' => 'e' %>
+
+<div style="clear:both"></div>
+<br /><br /><%= debug @bracket.games %><br /><br />

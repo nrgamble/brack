@@ -1,0 +1,64 @@
+/* main.css */
+
+.ui-footer .ui-btn {
+  margin: .1em 0;
+}
+
+a { text-decoration: none; }
+
+label { font-weight: bold !important; }
+
+td.num { text-align: right; }
+
+.none { display: none; }
+
+#pools_standings {
+  .ui-block-a, .ui-block-b {
+    padding: 12px 4px;
+  }
+}
+
+#standings {
+  width: 100%;
+  
+  td, th {
+    padding: 4px;
+  }
+  
+  th {
+    text-align: right;
+  }
+  
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+  .place { border: 0; }
+}
+
+.s2, .s3 {
+  margin: 12px 0;
+}
+
+.lines {
+  height: 10px;
+  min-width: 20px;
+  border: 1px solid #000;
+}
+
+.bleft {
+  .lines { border-left: 0; }
+}
+.bright {
+  float: right;
+
+  .lines { border-right: 0; }
+}
+
+.top {
+  .lines { border-bottom: 0; }
+}
+.bottom {
+  .lines { border-top: 0; }
+}
+
+.value { margin: .5em 2% 0 0; }

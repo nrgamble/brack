@@ -1,0 +1,25 @@
+<table id="standings">
+  <thead>
+  <tr>
+    <th></th>
+    <th></th>
+    <th class="num">W</th>
+    <th class="num">L</th>
+    <th class="num">%</th>
+    <th class="num">+/-</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% i = 0 %>
+  <% teams.each do |team| %>
+    <tr>
+      <td class="num place"><%= i += 1 %></td>
+      <td class="team"><%= link_to team.name, team %></td>
+      <td class="num"><%= team.wins.length %></td>
+      <td class="num"><%= team.losses.length %></td>
+      <td class="num"><%= format_win_percentage(team.win_percentage) %></td>
+      <td class="num"><%= '+' if team.plus_minus.to_i > 0 %><%= team.plus_minus.to_i %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

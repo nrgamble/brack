@@ -1,0 +1,57 @@
+<% content_for :header do %>
+  <% if not request.referer.index('pools').nil? %>
+    <%= link_to @team.pool.name, @team.pool,
+                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
+  <% else %>
+    <%= link_to @team.tournament.name, @team.tournament,
+                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
+  <% end %>
+  <h1 class="ui-title" role="heading" aria-level="1"><%= @team.name %></h1>
+  <%= link_to '', edit_team_path(@team), 'class' => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-edit' if user_can_do_shit? %>
+<% end %>
+
+<p><b>Record:</b> <%= @team.wins.length %> - <%= @team.losses.length %></p>
+
+<% if user_can_do_shit? %>
+  <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <% unless @team.pool.nil? %>
+    <%= link_to 'New Game', new_game_path(:tournament_id => @team.tournament.id, :pool_id => @team.pool.id), 'data-role' => 'button', 'data-theme' => 'b' %>
+    <% end %>
+  </div>
+<% end %>
+
+<div data-role="navbar">
+  <ul>
+    <li><a id="a_games" class="ui-btn-active ui-btn-up-c">Games</a></li>
+    <li><a id="a_h2h">Head-to-Head</a></li>
+  </ul>
+</div>
+
+<div id="panes">
+
+  <div class="pane">
+    <ul id="games" data-role="listview" data-inset="true">
+      <% @team.games.each do |game| %>
+        <li>
+          <% if game.winner?(@team) %>
+            <%= link_to "W vs. #{game.loser.name} (#{game.score_winner} - #{game.score_loser})", game %>
+          <% else %>
+            <%= link_to "L vs. #{game.winner.name} (#{game.score_loser} - #{game.score_winner})", game %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="pane none">
+    <ul id="h2h" data-role="listview" data-inset="true">
+      <% @team.opponents.each do |team| %>
+        <% if @team != team %>
+          <li><%= link_to "#{team.name}: #{@team.head2head(team)[0]} - #{@team.head2head(team)[1]}", team %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  
+</div>
+

@@ -1,0 +1,11 @@
+  <div data-role="fieldcontain">
+    <%= f.label :tournament_id %>
+    <%= f.hidden_field(:tournament_id, :value => @tournament.id) %>
+    <div class="value"><%= @tournament.name %></div>
+  </div>
+
+  <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
+  
+  <% unless @pool.new_record? %>
+    <%= link_to 'Delete', @pool, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'b' %>
+  <% end %>

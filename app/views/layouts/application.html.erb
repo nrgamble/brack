@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tourney Time</title>
+  <%= csrf_meta_tags %>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css" />
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="/assets/jquery_ujs.js?body=1"></script>
+  <script>
+    $(document).bind('mobileinit', function() {
+      $.mobile.ajaxEnabled = false;
+    });
+  </script>
+  <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head>
+<body class="<%= @body[:classes].join(' ') %>">
+
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="fixed">
+    <%= yield :header %>
+  </div>
+
+  <div data-role="content">
+    <%= yield %>
+  </div>
+  
+  <div data-role="footer">
+    <%= link_to current_user.email_name, edit_user_registration_path,
+                :class => "ui-btn-left ui-btn ui-btn-inline ui-btn-active ui-mini ui-btn-icon-notext ui-icon-user" if user_signed_in? %>
+    <h4>&copy; Tore Knee Labs</h4>
+    <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete,
+                :class => "ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-power" if user_signed_in? %>
+  </div>
+  
+</div>
+
+<script src="/assets/main.js"></script>
+
+</body>
+</html>

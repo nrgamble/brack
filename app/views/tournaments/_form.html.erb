@@ -1,0 +1,10 @@
+<div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
+<div data-role="fieldcontain">
+  <%= f.label :date %>
+  <%= f.text_field :date, :value => l(@tournament.date, :format => :ymd), 'data-role' => 'date' %>
+</div>
+<div data-role="fieldcontain"><%= f.label :location %> <%= f.text_field :location %></div>
+  
+<% unless @tournament.new_record? %>
+  <%= link_to 'Delete', @tournament, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'b' %>
+<% end %>
