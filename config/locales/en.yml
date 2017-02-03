@@ -28,3 +28,4 @@ en:
       nicedatetime: "%A, %B %e, %Y at %-l:%M%p"
       ymd: "%Y-%m-%d"
       his: "%-l:%M"
+      form: "%-m/%-d/%Y %l:%M %p"

@@ -60,7 +60,7 @@ class Bracket < ApplicationRecord
     (1...r).each do |i|
       t += num_games_in_round(i)
     end
-    g = games.slice(t, num_games_in_round(r))
+    g = games.to_ary.slice(t, num_games_in_round(r))
     g = [] if g.nil?
     return g
   end
@@ -90,13 +90,13 @@ private
   def _seed(_bracket, _teams)
     if _bracket.kind_of?(Array)
       lbracket, rbracket = _bracket
-      lteams, rteams     = _split(_teams)
+      lteams, rteams     = _split(_teams) 
       return [ _seed(lbracket, lteams), _seed(rbracket, rteams) ]
     else
       if generated?
-        _search_games(_teams[0].id, _teams[1].id)
+        return _search_games(_teams[0].id, _teams[1].id)
       else
-        games.create({
+        return games.create({
           :tournament_id => tournament.id,
           :home_id       => _teams[0].id,
           :away_id       => _teams[1].id,
@@ -123,7 +123,7 @@ private
 
   def _search_games(home_id, away_id)
     games.each do |g|
-      return g if g.home_id = home_id and g.away_id = away_id
+      return g if g.home_id == home_id and g.away_id == away_id
     end
   end
   

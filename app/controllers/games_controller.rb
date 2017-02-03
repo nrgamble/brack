@@ -29,9 +29,15 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      redirect_to @game.pool
+      respond_to do |format|
+        format.html { redirect_to @game.pool }
+        format.json { render :json => true }
+      end
     else
-      # render :action => :new
+      respond_to do |format|
+        format.html { render :action => :new } # Need tourny/pool params
+        format.json { render :json => false }
+      end
     end
   end
   

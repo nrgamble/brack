@@ -9,8 +9,8 @@
   <div class="value"><%= @pool.name %></div>
 </div>
 <div data-role="fieldcontain">
-  <%= f.label :date, 'Time' %>
-  <%= f.text_field :date, :value => @game.date, :disabled => ! user_can_do_shit? %>
+  <%= f.label :date, 'Date / Time' %>
+  <%= f.text_field :date, :value => "#{l(@game.date, :format => :form)}", :disabled => ! user_can_do_shit? %>
 </div>
 <div data-role="fieldcontain">
   <%= f.label :court_id %>

@@ -32,11 +32,13 @@
   <div class="pane none">
     <div id="games">
       <ul data-role="listview" data-inset="true" data-split-theme="d">
-        <% @pool.schedule.each do |game| %>
+        <% @pool.schedule.each do |date, games| %>
+          <li><%= "#{l(date.in_time_zone('America/Chicago'), :format => :nice)}" %>
+          <% games.each do |game| %>
           <li>
-            <%= link_to "#{l(game.date.in_time_zone('America/Chicago'), :format => :nicetime)}
-                         - Court #{game.court_id}
-                         - #{game.winner.name} (#{game.score_winner}) def. #{game.loser.name} (#{game.score_loser})", game %></li>
+            <%= link_to "#{game.winner.name} (#{game.score_winner}) #{game.score_winner == game.score_loser ? 'vs.' : 'def.'} #{game.loser.name} (#{game.score_loser}) 
+                         - #{l(game.date, :format => :nicetime)}: Court #{game.court_id}", game %></li>
+          <% end %>
         <% end %>
       </ul>
     </div>

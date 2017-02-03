@@ -6,6 +6,7 @@ class BracketsController < ApplicationController
     @teams      = @tournament.standings
 
     @rounds = []
+    # logger.debug @bracket.rounds
     @bracket.rounds.each do |r|
       @rounds << bracket_render(r)
     end

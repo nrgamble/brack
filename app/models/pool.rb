@@ -9,7 +9,14 @@ class Pool < ApplicationRecord
   end
 
   def schedule
-    games.sort { |x,y| x.date <=> y.date }
+    _schedule = {}
+    # games.sort { |x,y| x.date <=> y.date }
+    games.each { |g|
+      day = "#{g.date.year}-#{g.date.month}-#{g.date.day}"
+      _schedule[day] = [] unless _schedule.has_key?(day)
+      _schedule[day] << g
+    }
+    _schedule
   end
   
 end

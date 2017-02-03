@@ -1,11 +1,6 @@
 <% content_for :header do %>
-  <% if not request.referer.index('pools').nil? %>
-    <%= link_to @team.pool.name, @team.pool,
-                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
-  <% else %>
-    <%= link_to @team.tournament.name, @team.tournament,
-                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
-  <% end %>
+  <%= link_to @team.pool.name, @team.pool,
+              :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
   <h1 class="ui-title" role="heading" aria-level="1"><%= @team.name %></h1>
   <%= link_to '', edit_team_path(@team), 'class' => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-edit' if user_can_do_shit? %>
 <% end %>
