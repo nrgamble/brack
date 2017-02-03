@@ -7,9 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.css" />
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+  <script src="/assets/jquery_ujs.js?body=1"></script>
   <script>
     $(document).bind('mobileinit', function() {
       $.mobile.ajaxEnabled = false;
@@ -38,6 +39,8 @@
   </div>
   
 </div>
+
+<script src="<%= asset_path('main.js') %>"></script>
 
 </body>
 </html>
