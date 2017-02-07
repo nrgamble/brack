@@ -10,7 +10,7 @@
 </div>
 
 <p>
-  <%= l @game.date.in_time_zone('America/Chicago'), :format => :nicetime %>
+  <%= l @game.date, :format => :nicetime %>
   <% if @game.court_id %>
     <br>Court <%= @game.court_id %>
   <% end %>
