@@ -9,8 +9,20 @@
   <%= link_to @game.pool.name, @game.pool, 'data-role' => 'button', 'data-icon' => "carat-u" %>
 </div>
 
+<h3>
+  <% if @game.over? %>
+    <%= link_to @game.winner.name, @game.winner %> (<%= @game.score_winner%>)
+    def.
+    <%= link_to @game.loser.name, @game.loser %> (<%= @game.score_loser %>)
+  <% else %>
+    <%= link_to @game.away.name, @game.away %>
+    @
+    <%= link_to @game.home.name, @game.home %>
+  <% end %>
+</h3>
+
 <p>
-  <%= l @game.date, :format => :nicetime %>
+  <%= l @game.date, :format => :nice %>
   <% if @game.court_id %>
     <br>Court <%= @game.court_id %>
   <% end %>
@@ -18,9 +30,3 @@
     <br>Referee: <%= link_to @game.ref.name, @game.ref %>
   <% end %>
 </p>
-
-<h3>
-  <%= link_to @game.winner.name, @game.winner %> (<%= @game.score_winner%>)
-  def.
-  <%= link_to @game.loser.name, @game.loser %> (<%= @game.score_loser %>)
-</h3>

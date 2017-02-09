@@ -28,10 +28,14 @@
     <ul id="games" data-role="listview" data-inset="true">
       <% @team.games.each do |game| %>
         <li>
-          <% if game.winner?(@team) %>
-            <%= link_to "W vs. #{game.loser.name} (#{game.score_winner} - #{game.score_loser})", game %>
+          <% if game.over? %>
+            <% if game.winner?(@team) %>
+              <%= link_to "W vs. #{game.loser.name} (#{game.score_winner} - #{game.score_loser})", game %>
+            <% else %>
+              <%= link_to "L vs. #{game.winner.name} (#{game.score_loser} - #{game.score_winner})", game %>
+            <% end %>
           <% else %>
-            <%= link_to "L vs. #{game.winner.name} (#{game.score_loser} - #{game.score_winner})", game %>
+            <%= link_to "? vs. #{game.opponent(@team).name}", game %>
           <% end %>
         </li>
       <% end %>

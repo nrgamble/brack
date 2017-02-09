@@ -10,7 +10,7 @@ class Team < ApplicationRecord
   end
   
   def games
-    Game.where(:bracket_id => nil).where('away_id = ? OR home_id = ?', id, id).all
+    Game.where(:bracket_id => nil).where('away_id = ? OR home_id = ?', id, id).order(:date).all
   end
   
   def wins
@@ -64,7 +64,7 @@ class Team < ApplicationRecord
   def head2head(team)
     head2head = [0, 0]
     games.each do |g|
-      if g.home_id == team.id or g.away_id == team.id
+      if g.over? and (g.home_id == team.id or g.away_id == team.id)
         g.winner?(self) ? head2head[0] += 1 : head2head[1] += 1
       end
     end

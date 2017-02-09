@@ -33,14 +33,14 @@
     <div id="games">
       <ul data-role="listview" data-inset="true" data-split-theme="d">
         <% @pool.schedule.each do |date, games| %>
-          <li data-role="list-divider"><%= "#{l(date.in_time_zone('America/Chicago'), :format => :nice)}" %></li>
+          <li data-role="list-divider"><%= "#{l(date.in_time_zone('UTC'), :format => :nice)}" %></li>
           <% games.each do |game| %>
           <li>
             <a href="<%= game_path(game) %>">
-              <% if game.score_winner == game.score_loser %>
-                <%= game.away.name %> @ <%= game.home.name %>
+              <% if game.over? %>
+                <%= "#{game.winner.name} (#{game.score_winner})" %>  def. <%= "#{game.loser.name} (#{game.score_loser})" %>
               <% else %>
-                <%= "#{game.winner.name} (#{game.score_winner})" %>  def <%= "#{game.loser.name} (#{game.score_loser})" %>
+                <%= game.away.name %> @ <%= game.home.name %>
               <% end %>
               <p>
                 <strong><%= "#{l(game.date, :format => :nicetime)}" %></strong>

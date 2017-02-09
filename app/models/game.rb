@@ -44,7 +44,12 @@ class Game < ApplicationRecord
   end
 
   def over?
-    score_home != score_away
+    Time.now > date
+    # score_home != score_away
+  end
+
+  def opponent(team)
+    team == self.home ? self.away : self.home
   end
 
   # Bracket
