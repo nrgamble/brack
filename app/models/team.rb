@@ -12,10 +12,14 @@ class Team < ApplicationRecord
   def games
     Game.where(:bracket_id => nil).where('away_id = ? OR home_id = ?', id, id).order(:date).all
   end
+
+  def games_completed
+    Game.where(:bracket_id => nil).where('away_id = ? OR home_id = ?', id, id).where('date < ?', Time.now).order(:date).all
+  end
   
   def wins
     wins = Array.new
-    games.each do |g|
+    games_completed.each do |g|
       if (g.home_id == id and g.score_home > g.score_away) or (g.away_id == id and g.score_away > g.score_home)
         wins << g
       end
@@ -25,7 +29,7 @@ class Team < ApplicationRecord
   
   def losses
     losses = Array.new
-    self.games.each do |g|
+    games_completed.each do |g|
       if (g.home_id == id and g.score_home < g.score_away) or (g.away_id == id and g.score_away < g.score_home)
         losses << g
       end
@@ -34,12 +38,12 @@ class Team < ApplicationRecord
   end
   
   def calculate_win_percentage
-    games.size == 0 ? 0 : wins.size.to_f / games.size.to_f
+    games_completed.size == 0 ? 0 : wins.size.to_f / games_completed.size.to_f
   end
   
   def calculate_plus_minus
     plus_minus = 0
-    games.each do |g|
+    games_completed.each do |g|
       if g.winner?(self)
         plus_minus += (g.score_winner - g.score_loser)
       else
@@ -63,8 +67,8 @@ class Team < ApplicationRecord
   
   def head2head(team)
     head2head = [0, 0]
-    games.each do |g|
-      if g.over? and (g.home_id == team.id or g.away_id == team.id)
+    games_completed.each do |g|
+      if g.home_id == team.id or g.away_id == team.id
         g.winner?(self) ? head2head[0] += 1 : head2head[1] += 1
       end
     end
